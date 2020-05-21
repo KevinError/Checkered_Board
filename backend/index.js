@@ -1,9 +1,10 @@
 import express from 'express';
 import mongoose from 'mongoose';
 import bodyparser from 'body-parser';
+import routes from './routes/boxRoutes';
 
 const app = express();
-const PORT = 4000;
+const PORT = 8080;
 const url = 'mongodb://localhost:27017/local';
 
 // mongo connection
@@ -12,6 +13,8 @@ mongoose.connect(url, {useNewUrlParser: true, useUnifiedTopology: true});
 
 app.use(bodyparser.urlencoded({extended:true}));
 app.use(bodyparser.json());
+
+routes(app);
 
 app.get('/', (req, res) => 
     res.send(`It's working online ${PORT}`)
